@@ -1,0 +1,94 @@
+/* 變數定義：方便以後一鍵改色 */
+:root {
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --primary-blue: #3498db;
+    --text-main: #2c3e50;
+    
+    /* 職位顏色 */
+    --color-owner: #e74c3c;      /* 服主 */
+    --color-admin: #9b59b6;      /* 管理員 */
+    --color-pr: #e91e63;         /* 公關 */
+    --color-dev: #2ecc71;        /* 插件師 */
+}
+
+body {
+    font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 緩慢顯現動畫 */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 導覽卡片 */
+.nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+    width: 90%;
+    max-width: 800px;
+    margin: 40px 0;
+}
+
+.nav-item {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.nav-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+    color: var(--primary-blue);
+}
+
+/* 成員卡片樣式 */
+.member-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.member-card {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-left: 6px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.rank-tag {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: white;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+/* 職位對應 */
+.rank-owner { border-left-color: var(--color-owner); }
+.bg-owner { background-color: var(--color-owner); }
+.rank-admin { border-left-color: var(--color-admin); }
+.bg-admin { background-color: var(--color-admin); }
