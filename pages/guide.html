@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新手指南 - 養老伺服器</title>
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <style>
+        .guide-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+        .guide-step {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 25px;
+        }
+        .step-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+        .step-content h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        .step-content p {
+            color: #555;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/index.html" class="nav-link">首頁</a>
+        <div class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle">
+                伺服器介紹
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="/pages/rules.html" class="dropdown-item">伺服器規章</a></li>
+                <li><a href="/pages/member.html" class="dropdown-item">主要成員</a></li>
+                <li><a href="/pages/command.html" class="dropdown-item">常用指令</a></li>
+                <li><a href="/pages/qa.html" class="dropdown-item">常見問題</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="header">
+        <h1>新手指南</h1>
+        <p class="header-desc">三分鐘快速上手教學</p>
+        <div class="header-line"></div>
+    </header>
+
+    <div class="guide-container">
+        <div class="guide-step animated-card">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h3>註冊與登入</h3>
+                <p>首次進入伺服器，請使用 <code class="command-code">/register &lt;密碼&gt; &lt;確認密碼&gt;</code> 來註冊。之後每次登入只需輸入 <code class="command-code">/login &lt;密碼&gt;</code> 即可。</p>
+            </div>
+        </div>
+        <div class="guide-step animated-card">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h3>設定你的家</h3>
+                <p>找到一個喜歡的地方，輸入 <code class="command-code">/sethome</code> 將此處設為你的家。之後不論身在何處，只要輸入 <code class="command-code">/home</code> 就能立刻傳送回來。</p>
+            </div>
+        </div>
+        <div class="guide-step animated-card">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h3>保護你的財產</h3>
+                <p>我們使用金鏟子來保護你的建築。手持金鏟子，在你想要保護的區域對角線兩端點擊右鍵，即可建立領地。在領地內，只有你和獲得權限的玩家可以進行操作。</p>
+            </div>
+        </div>
+    </div>
+    <script src="../scripts/script.js"></script>
+</body>
+</html>

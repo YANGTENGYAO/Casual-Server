@@ -1,0 +1,165 @@
+.staff-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 0 20px 60px;
+}
+
+/* --- 核心優化：獨立發光卡片 --- */
+.staff-card {
+    background: var(--card-bg);
+    border-radius: 28px;
+    padding: 35px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03);
+    border: 2px solid transparent;
+    position: relative;
+    cursor: pointer;
+    transition:
+        transform 0.15s cubic-bezier(0, 0, 0.2, 1),
+        box-shadow 0.3s ease-out,
+        border-color 0.3s ease-out;
+    will-change: transform, box-shadow;
+}
+
+/* 當滑鼠碰觸時，立即觸發專屬發光 */
+.staff-card:hover {
+    transform: translateY(-12px);
+    border-color: var(--glow-color);
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.08),
+        0 0 20px var(--glow-color),
+        0 0 50px var(--glow-alpha);
+    z-index: 10; /* 確保發光時在最上層 */
+}
+
+/* 頭像背景圓圈 */
+.avatar-wrapper {
+    width: 95px;
+    height: 95px;
+    background: var(--bg-light);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 18px;
+    transition: transform 0.25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.staff-card:hover .avatar-wrapper {
+    transform: rotate(5deg) scale(1.05);
+}
+
+.staff-head {
+    width: 68px;
+    height: 68px;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.08));
+}
+
+/* 職位標籤 */
+.staff-role {
+    color: #fff;
+    padding: 3.5px 14px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+.staff-nickname {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--text-dark);
+    margin-bottom: 18px;
+}
+
+/* ID 標籤區 */
+.id-badge-container {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    margin-bottom: 22px;
+    max-width: 100%;
+}
+
+.id-badge {
+    display: flex;
+    align-items: center;
+    background: #f8f8f8;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 38px;
+    min-width: 160px;
+}
+
+.id-tag {
+    height: 100%;
+    width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+}
+
+/* Tooltip 泡泡 */
+.id-tag::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 4px 10px;
+    font-size: 11px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    pointer-events: none;
+}
+
+.id-tag:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mc-label {
+    background-color: #e8f5e9;
+}
+
+.dc-label {
+    background-color: var(--discord-color);
+}
+
+.icon-svg {
+    width: 22px;
+    height: 22px;
+}
+
+.id-value {
+    padding: 0 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+}
+
+.staff-intro {
+    font-size: 0.85rem;
+    color: #999;
+    line-height: 1.6;
+    max-width: 250px;
+}

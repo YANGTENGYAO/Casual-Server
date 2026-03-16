@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+:root {
+    --primary-color: #FFB800;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-dark: #333;
+    --text-light: #888;
+    --border-color: #eee;
+
+    /* Semantic Colors */
+    --rule-color: #e74c3c;
+    --guide-color: #27ae60;
+    --staff-color: #3498db;
+    --faq-color: #9b59b6;
+    --discord-color: #5865F2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    overflow-x: hidden; /* Prevents horizontal scroll from animations */
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Header --- */
+.header {
+    text-align: center;
+    padding: 80px 20px 60px;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 50px;
+}
+
+.header h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.header-desc {
+    color: var(--text-light);
+    font-size: 1.2rem;
+    margin-top: 10px;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeInUp 0.8s ease forwards 0.2s;
+}
+
+.header-line {
+    width: 60px;
+    height: 6px;
+    background: var(--primary-color);
+    margin: 25px auto 0;
+    border-radius: 10px;
+    opacity: 0;
+    transform: scaleX(0);
+    animation: lineGrow 0.8s ease forwards 0.4s;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 30px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+/* --- Animations --- */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes lineGrow {
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+/* --- Animated Card Entrance --- */
+.animated-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.animated-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}

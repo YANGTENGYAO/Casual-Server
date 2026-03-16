@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常見問題 - 養老伺服器</title>
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <style>
+        :root {
+            --color-connection: #5865F2;
+            --color-gameplay: #27ae60;
+            --color-account: #e74c3c;
+        }
+        /* --- 分類過濾器 --- */
+        .filter-bar {
+            max-width: 850px;
+            margin: 0 auto 30px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border-radius: 15px;
+            background: #fff;
+            border: 2px solid transparent;
+            font-weight: 700;
+            color: #777;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-btn span {
+            font-size: 0.75rem;
+            opacity: 0.5;
+            background: #eee;
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+
+        .filter-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+
+        /* 啟動狀態的發光 (與類別顏色連動) */
+        .filter-btn.active[data-type="all"] { border-color: var(--primary-color); color: var(--primary-color); box-shadow: 0 0 15px rgba(255, 184, 0, 0.2); }
+        .filter-btn.active[data-type="connection"] { border-color: var(--color-connection); color: var(--color-connection); box-shadow: 0 0 15px rgba(88, 101, 242, 0.2); }
+        .filter-btn.active[data-type="gameplay"] { border-color: var(--color-gameplay); color: var(--color-gameplay); box-shadow: 0 0 15px rgba(39, 174, 96, 0.2); }
+        .filter-btn.active[data-type="account"] { border-color: var(--color-account); color: var(--color-account); box-shadow: 0 0 15px rgba(231, 76, 60, 0.2); }
+
+        /* --- FAQ 容器 --- */
+        .faq-container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: 
+                transform 0.12s cubic-bezier(0, 0, 0.2, 1), 
+                box-shadow 0.25s ease-out, 
+                border-color 0.25s ease-out, 
+                opacity 0.25s ease;
+            will-change: transform, box-shadow;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--theme-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05), 0 0 15px var(--theme-glow);
+            z-index: 5;
+        }
+
+        .faq-question {
+            padding: 22px 28px;
+            display: flex;
+            align-items: center;
+            user-select: none;
+        }
+
+        .q-icon {
+            width: 32px; height: 32px;
+            background: var(--theme-color);
+            color: #fff;
+            border-radius: 10px;
+            display: flex; justify-content: center; align-items: center;
+            font-weight: 900;
+            margin-right: 18px;
+            flex-shrink: 0;
+        }
+
+        .question-text { font-size: 1.1rem; font-weight: 700; color: #333; flex-grow: 1; }
+
+        .arrow-icon { width: 20px; height: 20px; transition: 0.3s; fill: #ccc; }
+        .faq-item.active .arrow-icon { transform: rotate(180deg); fill: var(--theme-color); }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #fafafa;
+        }
+
+        .answer-content {
+            padding: 0 28px 25px 78px;
+            font-size: 0.95rem; color: #666; line-height: 1.8;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 20px;
+        }
+
+        .highlight { color: var(--theme-color); font-weight: 700; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/index.html" class="nav-link">首頁</a>
+        <div class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle active">
+                伺服器介紹
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="/pages/rules.html" class="dropdown-item">伺服器規章</a></li>
+                <li><a href="/pages/member.html" class="dropdown-item">主要成員</a></li>
+                <li><a href="/pages/command.html" class="dropdown-item">常用指令</a></li>
+                <li><a href="/pages/qa.html" class="dropdown-item active">常見問題</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="header">
+        <h2>常見問題</h2>
+        <div class="header-line"></div>
+    </header>
+
+    <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active animated-card" data-type="all">全部 <span id="count-all">0</span></button>
+        <button class="filter-btn animated-card" data-type="connection">連線類 <span id="count-connection">0</span></button>
+        <button class="filter-btn animated-card" data-type="gameplay">玩法類 <span id="count-gameplay">0</span></button>
+        <button class="filter-btn animated-card" data-type="account">帳號類 <span id="count-account">0</span></button>
+    </div>
+
+    <div class="faq-container" id="faqGrid"></div>
+
+    <script>
+        const faqData = [
+            { type: 'connection', q: "為什麼顯示「無法連線至伺服器」？", a: "請先確認你的遊戲版本是否為 <span class='highlight'>1.21.x</span>。若版本正確仍無法連線，請重新啟動路由器或查看公告。" },
+            { type: 'gameplay', q: "伺服器有領地系統嗎？如何防範小偷？", a: "有的！我們使用 <span class='highlight'>金鏟子領地插件</span>。手持金鏟子點擊地面對角即可圈地。" },
+            { type: 'account', q: "忘記登入密碼了怎麼辦？", a: "請前往 Discord 聯繫 <span class='highlight'>管理員</span> 並提供截圖證明，我們會手動幫你重置密碼。" },
+            { type: 'gameplay', q: "伺服器會刪除地圖（洗白）嗎？", a: "我們定位為 <span class='highlight'>永久養老服</span>，除非遇到重大技術故障，否則絕不刪除進度。" },
+            { type: 'connection', q: "進入伺服器後非常延遲（Lag）？", a: "建議安裝 <span class='highlight'>Sodium</span> 等優化模組。若延遲感來自網路，請更換 DNS 設定。" }
+        ];
+
+        const themeColors = {
+            'connection': { main: '#5865F2', glow: 'rgba(88, 101, 242, 0.4)' },
+            'gameplay': { main: '#27ae60', glow: 'rgba(39, 174, 96, 0.4)' },
+            'account': { main: '#e74c3c', glow: 'rgba(231, 76, 60, 0.4)' }
+        };
+
+        const grid = document.getElementById('faqGrid');
+        const filterBar = document.getElementById('filterBar');
+
+        // 渲染 FAQ
+        function renderFAQ(filterType = 'all') {
+            grid.innerHTML = faqData
+                .filter(item => filterType === 'all' || item.type === filterType)
+                .map((item, index) => {
+                    const colorInfo = themeColors[item.type];
+                    return `
+                        <div class="faq-item animated-card" 
+                             data-type="${item.type}"
+                             onclick="toggleFAQ(this)"
+                             style="--theme-color: ${colorInfo.main}; --theme-glow: ${colorInfo.glow}; transition-delay: ${index * 0.05}s;">
+                            <div class="faq-question">
+                                <div class="q-icon">Q</div>
+                                <div class="question-text">${item.q}</div>
+                                <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="answer-content">${item.a}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            
+            // Trigger animation
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.animated-card').forEach(card => observer.observe(card));
+        }
+
+        // 更新計數器
+        function updateCounts() {
+            document.getElementById('count-all').innerText = faqData.length;
+            ['connection', 'gameplay', 'account'].forEach(type => {
+                const count = faqData.filter(item => item.type === type).length;
+                document.getElementById(`count-${type}`).innerText = count;
+            });
+        }
+
+        // 摺疊開關
+        function toggleFAQ(item) {
+            const answer = item.querySelector('.faq-answer');
+            const isActive = item.classList.contains('active');
+
+            document.querySelectorAll('.faq-item.active').forEach(other => {
+                if (other !== item) {
+                    other.classList.remove('active');
+                    other.querySelector('.faq-answer').style.maxHeight = null;
+                }
+            });
+
+            if (isActive) {
+                item.classList.remove('active');
+                answer.style.maxHeight = null;
+            } else {
+                item.classList.add('active');
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            }
+        }
+
+        // 過濾點擊事件
+        filterBar.addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                filterBar.querySelector('.active').classList.remove('active');
+                e.target.classList.add('active');
+                renderFAQ(e.target.dataset.type);
+            }
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCounts();
+            renderFAQ();
+        });
+    </script>
+</body>
+</html>

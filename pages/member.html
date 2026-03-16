@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主要成員 - 養老伺服器</title>
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/member.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/index.html" class="nav-link">首頁</a>
+        <div class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle active">
+                伺服器介紹
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="/pages/rules.html" class="dropdown-item">伺服器規章</a></li>
+                <li><a href="/pages/member.html" class="dropdown-item active">主要成員</a></li>
+                <li><a href="/pages/command.html" class="dropdown-item">常用指令</a></li>
+                <li><a href="/pages/qa.html" class="dropdown-item">常見問題</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="header">
+        <h1>主要成員</h1>
+        <p class="header-desc">認識默默守護的管理團隊</p>
+        <div class="header-line"></div>
+    </header>
+
+    <div class="staff-grid" id="staffGrid"></div>
+
+    <script>
+        const roles = {
+            "服主": { weight: 1, color: "#e74c3c" },
+            "主機提供者": { weight: 2, color: "#2980b9" },
+            "管理員": { weight: 3, color: "#f39c12" },
+            "插件師": { weight: 4, color: "#9b59b6" },
+            "公關": { weight: 5, color: "#1abc9c" },
+            "輔導員": { weight: 6, color: "#27ae60" },
+            "實習管理員": { weight: 7, color: "#7f8c8d" },
+            "吉祥物": { weight: 8, color: "#ff85a2" }
+        };
+
+        const staffData = [
+            { nickname: "POBO", mcName: "PhiLia0928", dcName: "philia0928", role: "服主", intro: "伺服器負責人。" },
+            { nickname: "水餃", mcName: "wchDumpling", dcName: "wchdumpling", role: "主機提供者", intro: "技術核心與維護。" },
+            { nickname: "愛麗絲", mcName: "Angelice_0815", dcName: "alice_0815", role: "管理員", intro: "伺服器環境維護。" },
+            { nickname: "yan", mcName: "yannay1124", dcName: "yannay1124", role: "管理員", intro: "規則執行與協助。" },
+            { nickname: "奈玲", mcName: "iceling_mew", dcName: "iceling_1354", role: "插件師", intro: "功能開發與優化。" },
+            { nickname: "蘋果", mcName: "ping0817", dcName: "yi_ping_0817", role: "公關", intro: "負責對外合作與推廣。" },
+            { nickname: "豪哥", mcName: "justin_0430", dcName: "justin_0430", role: "實習管理員", intro: "管理事務實習中。" },
+            { nickname: "八哥", mcName: "HydrauliCat", dcName: "不公開", role: "吉祥物", intro: "大家的好朋友。" }
+        ];
+
+        const grid = document.getElementById('staffGrid');
+
+        function renderStaff() {
+            const sortedData = [...staffData].sort((a, b) => {
+                const weightA = roles[a.role]?.weight || 99;
+                const weightB = roles[b.role]?.weight || 99;
+                return weightA - weightB;
+            });
+
+            grid.innerHTML = sortedData.map((staff, index) => {
+                const roleInfo = roles[staff.role] || { color: "#999" };
+                
+                // 🔹 配色邏輯：光芒核心、擴散、頭像背景
+                const glowColor = roleInfo.color + "80"; 
+                const glowAlpha = roleInfo.color + "22"; 
+                const bgLight = roleInfo.color + "15";   
+
+                let dcBadge = '';
+                if (staff.dcName !== '不公開') {
+                    dcBadge = `
+                    <div class="id-badge">
+                        <div class="id-tag dc-label" data-tooltip="Discord ID">
+                            <svg class="icon-svg" viewBox="0 0 24 24" fill="white">
+                                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.086 2.157 2.419c0 1.334-.947 2.419-2.157 2.419zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.086 2.157 2.419c0 1.334-.946 2.419-2.157 2.419z"/>
+                            </svg>
+                        </div>
+                        <div class="id-value">${staff.dcName}</div>
+                    </div>`;
+                }
+
+                return `
+                    <div class="staff-card animated-card" style="--glow-color: ${glowColor}; --glow-alpha: ${glowAlpha}; --bg-light: ${bgLight}; transition-delay: ${index * 0.05}s;">
+                        <div class="avatar-wrapper">
+                            <img class="staff-head" src="https://mc-heads.net/head/${staff.mcName}/100" alt="Avatar" loading="lazy">
+                        </div>
+                        <span class="staff-role" style="background-color: ${roleInfo.color}">${staff.role}</span>
+                        <h3 class="staff-nickname">${staff.nickname}</h3>
+                        
+                        <div class="id-badge-container">
+                            <div class="id-badge">
+                                <div class="id-tag mc-label" data-tooltip="Minecraft ID">
+                                    <svg class="icon-svg" viewBox="0 0 24 24">
+                                        <path fill="#795548" d="M12 22l-9-4.5v-9l9 4.5l9-4.5v9z"/>
+                                        <path fill="#5D4037" d="M21 8.5l-9 4.5v9l9-4.5z" opacity="0.8"/>
+                                        <path fill="#8BC34A" d="M12 4l9 4.5l-9 4.5l-9-4.5z"/>
+                                        <path fill="#4CAF50" d="M3 8.5v1.5l9 4.5l9-4.5v-1.5l-9 4.5z"/>
+                                    </svg>
+                                </div>
+                                <div class="id-value">${staff.mcName}</div>
+                            </div>
+                            ${dcBadge}
+                        </div>
+
+                        <p class="staff-intro">${staff.intro}</p>
+                    </div>
+                `;
+            }).join('');
+
+            // Trigger animation
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.animated-card').forEach(card => {
+                observer.observe(card);
+            });
+        }
+        renderStaff();
+    </script>
+</body>
+</html>

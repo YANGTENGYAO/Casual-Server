@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伺服器規章 - 養老伺服器</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+
+        :root {
+            --primary-color: #FFB800;
+            --bg-color: #f4f4f4;
+            --text-main: #333;
+            --text-sub: #666;
+            --card-bg: #ffffff;
+            --warning-bg: #fffcf5;
+            --danger-red: #e74c3c;
+            
+            /* --- 這裡填入妳的背景圖片網址 --- */
+            /* 如果不想放圖片，請保持為 url('') 即可，它會自動變回白色 */
+            --header-image: url('https://your-image-url.jpg'); 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            scroll-behavior: smooth;
+        }
+
+        /* 頂部標題區 - 修改過的背景邏輯 */
+        .header-section {
+            text-align: center;
+            padding: 100px 20px; /* 加深一點高度，讓圖片露出來更多 */
+            
+            /* 背景設定：半透明遮罩 + 背景圖片 */
+            background-color: #ffffff; 
+            background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), var(--header-image);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* 捲動時會有微微的視差效果，很高級 */
+            
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+
+        .header-section h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 5px;
+            color: #111;
+            text-shadow: 0 2px 10px rgba(255,255,255,0.8); /* 讓標題在圖片上更亮 */
+        }
+
+        .header-line {
+            width: 60px;
+            height: 6px;
+            background: var(--primary-color);
+            margin: 15px auto;
+            border-radius: 3px;
+        }
+
+        /* --- 以下保持不變的佈局與樣式 --- */
+        .main-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 40px;
+            padding: 0 20px 100px;
+        }
+
+        .sidebar { position: sticky; top: 40px; height: fit-content; }
+        .sidebar ul { list-style: none; border-left: 2px solid #ddd; }
+        .sidebar li a {
+            display: block; padding: 12px 25px; text-decoration: none;
+            color: var(--text-sub); font-weight: 700; transition: 0.3s;
+        }
+        .sidebar li a:hover, .sidebar li a.active {
+            color: var(--primary-color); border-left: 5px solid var(--primary-color);
+            margin-left: -2px; background: rgba(255, 184, 0, 0.08);
+        }
+
+        .content-section { display: flex; flex-direction: column; gap: 40px; }
+        .chapter-card {
+            background: var(--card-bg); border-radius: 24px; padding: 45px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.03);
+            opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out;
+        }
+        .chapter-card.reveal { opacity: 1; transform: translateY(0); }
+        .chapter-card h2 {
+            font-size: 1.8rem; font-weight: 900; margin-bottom: 30px;
+            display: flex; align-items: center; gap: 15px;
+        }
+        .chapter-card h2::before {
+            content: ''; width: 8px; height: 28px; background: var(--primary-color); border-radius: 4px;
+        }
+
+        .rules-list { list-style: none; }
+        .rules-list li { margin-bottom: 25px; }
+        .rule-title { font-weight: 900; color: #000; display: block; margin-bottom: 8px; font-size: 1.15rem; }
+        .rule-desc { color: var(--text-sub); font-size: 1rem; }
+
+        .disclaimer-box {
+            background: var(--warning-bg); border-radius: 16px; padding: 25px;
+            margin-top: 10px; border: 1px dashed var(--primary-color);
+        }
+
+        .punish-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .punish-card { padding: 25px; border-radius: 16px; background: #fafafa; border-top: 5px solid #eee; }
+        .punish-card.danger { background: #fff5f5; border-top-color: var(--danger-red); }
+        .tag { font-size: 0.8rem; padding: 3px 12px; border-radius: 6px; font-weight: 900; margin-bottom: 12px; display: inline-block; }
+        .tag-low { background: #eee; color: #666; }
+        .tag-high { background: var(--danger-red); color: #fff; }
+
+        @media (max-width: 850px) {
+            .main-container { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+            .header-section { padding: 60px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-section">
+        <h1>伺服器規章</h1>
+        <div class="header-line"></div>
+        <p style="color: #666; font-weight: 700; text-shadow: 0 1px 5px rgba(255,255,255,0.8);">穩定、和諧、養老 — 我們的共同守則</p>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <ul id="nav-list">
+                <li><a href="#ch1" class="active">第一章：總則</a></li>
+                <li><a href="#ch2">第二章：行為準則</a></li>
+                <li><a href="#ch3">第三章：公平性</a></li>
+                <li><a href="#ch4">第四章：領地規範</a></li>
+                <li><a href="#ch5">第五章：PVP 規範</a></li>
+                <li><a href="#ch6">第六章：處分制度</a></li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <section id="ch1" class="chapter-card">
+                <h2>第一章、總則與免責聲明</h2>
+                <ul class="rules-list">
+                    <li><span class="rule-title">同意條款</span><p class="rule-desc">凡登入本伺服器之玩家，即視為完全詳閱並同意本規範內容。</p></li>
+                    <li><span class="rule-title">最終解釋權</span><p class="rule-desc">管理團隊保有規章之最終解釋權、修訂權與裁決權。規則修訂後立即生效。</p></li>
+                </ul>
+                <div class="disclaimer-box">
+                    <strong style="color: #d49a00;">⚠️ 免責聲明 (Disclaimer)</strong>
+                    <p class="rule-desc" style="margin-top: 10px;">數據安全、玩家糾紛與帳號安全之相關說明。</p>
+                </div>
+            </section>
+            <section id="ch2" class="chapter-card"><h2>第二章、玩家行為準則</h2><ul class="rules-list"><li><span class="rule-title">言語騷擾</span><p class="rule-desc">禁止公頻洗版、辱罵、性騷擾、仇恨言論或任何形式的惡意挑釁。</p></li><li><span class="rule-title">個資與隱私</span><p class="rule-desc">禁止未經許可擅自公開他人現實個資或損害名譽之資訊。</p></li></ul></section>
+            <section id="ch3" class="chapter-card"><h2>第三章、遊戲公平性</h2><ul class="rules-list"><li><span class="rule-title">作弊零容忍</span><p class="rule-desc">嚴禁使用任何提供不公平優勢之模組 (Mods)、外掛客戶端或透視材質包。</p></li><li><span class="rule-title">漏洞濫用</span><p class="rule-desc">發現 Bug 應立即回報。利用漏洞獲利 (如刷物) 者一律視同外掛處理。</p></li></ul></section>
+            <section id="ch4" class="chapter-card"><h2>第四章、領地與建築規範</h2><ul class="rules-list"><li><span class="rule-title">【領地保護】</span><p class="rule-desc">請自行使用領地系統。未圈地造成之破壞官方不予處理。嚴禁惡意圍地阻礙他人擴張。</p></li><li><span class="rule-title">【紅石與機器限制】</span><p class="rule-desc">禁止建立無開關之高頻紅石。離線或未使用時，機械必須處於關閉狀態。</p></li></ul></section>
+            <section id="ch5" class="chapter-card"><h2>第五章、PVP 與戰鬥規範</h2><ul class="rules-list"><li><span class="rule-title">風險自負</span><p class="rule-desc">在開啟 PVP 狀態下，玩家須自行承擔被擊殺或裝備噴落之風險。</p></li><li><span class="rule-title">互不干涉</span><p class="rule-desc">管理員不介入正常的 PVP 復仇行為，除非涉及外掛或利用 Bug。</p></li></ul></section>
+            <section id="ch6" class="chapter-card"><h2>第六章、違規處分制度</h2><div class="punish-grid"><div class="punish-card"><span class="tag tag-low">輕微違規</span><p class="rule-desc"><strong>處置：</strong>口頭警告 / Kick / 禁言。</p></div><div class="punish-card danger"><span class="tag tag-high">嚴重違規</span><p class="rule-desc"><strong>初犯：</strong>封禁 365 天 + 數據重置。</p></div></div></section>
+        </div>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('reveal'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.chapter-card').forEach(card => observer.observe(card));
+
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".sidebar ul li a");
+        function changeActiveNav() {
+            let current = "ch1";
+            sections.forEach((section) => { if (window.pageYOffset >= section.offsetTop - 150) current = section.getAttribute("id"); });
+            navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href") === `#${current}`) link.classList.add("active");
+            });
+        }
+        window.addEventListener("scroll", changeActiveNav);
+        window.addEventListener("load", changeActiveNav);
+    </script>
+</body>
+</html>

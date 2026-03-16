@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用指令 - 養老伺服器</title>
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <style>
+        .command-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+        .command-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+        }
+        .command-table th, .command-table td {
+            padding: 18px 22px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .command-table th {
+            background-color: #f9f9f9;
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+        .command-table tr:last-child td {
+            border-bottom: none;
+        }
+        .command-code {
+            font-family: 'Courier New', Courier, monospace;
+            background: #eef1f3;
+            padding: 4px 8px;
+            border-radius: 6px;
+            color: #c7254e;
+            font-weight: 700;
+        }
+        .command-description {
+            color: #555;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/index.html" class="nav-link">首頁</a>
+        <div class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle active">
+                伺服器介紹
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="/pages/rules.html" class="dropdown-item">伺服器規章</a></li>
+                <li><a href="/pages/member.html" class="dropdown-item">主要成員</a></li>
+                <li><a href="/pages/command.html" class="dropdown-item active">常用指令</a></li>
+                <li><a href="/pages/qa.html" class="dropdown-item">常見問題</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="header">
+        <h1>常用指令</h1>
+        <p class="header-desc">讓你快速上手的伺服器指令</p>
+        <div class="header-line"></div>
+    </header>
+
+    <div class="command-container">
+        <table class="command-table animated-card">
+            <thead>
+                <tr>
+                    <th>指令</th>
+                    <th>說明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code class="command-code">/register &lt;密碼&gt; &lt;確認密碼&gt;</code></td>
+                    <td class="command-description">首次加入伺服器時註冊你的帳號。</td>
+                </tr>
+                <tr>
+                    <td><code class="command-code">/login &lt;密碼&gt;</code></td>
+                    <td class="command-description">每次登入伺服器時使用。</td>
+                </tr>
+                <tr>
+                    <td><code class="command-code">/sethome</code></td>
+                    <td class="command-description">設定你目前的所在地為家。</td>
+                </tr>
+                <tr>
+                    <td><code class="command-code">/home</code></td>
+                    <td class="command-description">傳送回你設定的家。</td>
+                </tr>
+                <tr>
+                    <td><code class="command-code">/tpa &lt;玩家ID&gt;</code></td>
+                    <td class="command-description">向指定玩家發送傳送請求。</td>
+                </tr>
+                <tr>
+                    <td><code class="command-code">/tpaccept</code></td>
+                    <td class="command-description">接受其他玩家的傳送請求。</td>
+                </tr>
+                 <tr>
+                    <td><code class="command-code">/spawn</code></td>
+                    <td class="command-description">回到伺服器重生點。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="../scripts/script.js"></script>
+</body>
+</html>
